@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './pages/Header'
+import Videos from './pages/Videos'
 
 function App() {
 
   return (
-    <>
-      <Header />
-      <div className='text-2xl'>HELLO HELLO HELLO</div>
-    </>
+    <div className="home-page">
+      <div className="bg-[url('/src/assets/frutiger-aero.webp')] bg-[length:100%_100%] bg-no-repeat min-h-screen text-[rgb(6,24,102)]">
+        <Header />
+        <Videos />
+      </div>
+    </div>
   )
 }
 
