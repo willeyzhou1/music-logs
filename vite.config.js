@@ -8,5 +8,5 @@ export default defineConfig({
     react(), 
     tailwindcss()
   ],
-  base: '/music-logs/'
+  base: "/music-logs/"
 })
