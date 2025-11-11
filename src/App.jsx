@@ -1,13 +1,30 @@
 import './App.css'
+import { motion } from "motion/react"
+import { useState, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './pages/Header'
 import Videos from './pages/Videos'
 import MusicLanding from './pages/music-apps/MusicLanding'
-import { motion } from "motion/react"
-import { useState, useEffect } from 'react'
+import defaultImage from "./assets/images/frutiger-aero.webp"
+import repeatingBackground from "./assets/images/repeating-background.jpg"
 import dolphins from './assets/images/dolphins.gif'
-import { Routes, Route, Link } from 'react-router-dom'
 
 function App() {
+  const [background, setBackground] = useState(defaultImage)
+  const location = useLocation();
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/music-logs/":
+        setBackground(defaultImage);
+        break;
+      case "/music-logs/songs":
+        setBackground(repeatingBackground); // put another image here
+        break;
+      default:
+        setBackground(defaultImage);
+    }
+  }, [location.pathname])
+
   function getMousePosition() {
     const [mousePosition, setMousePosition] = useState({x: 0, y: 0})
     
@@ -26,30 +43,29 @@ function App() {
   const mousePosition = getMousePosition();
   return (
     
-    <div className="home-page">
+    <div className="min-h-screen text-[rgb(6,24,102)]"
+    style={{
+        background: `url(${background})`,
+        backgroundSize: "100% 100%",
+      }}>
       {/** Element to make dolphin follow cursor */}
-      <div className="bg-[url('/src/assets/images/frutiger-aero.webp')] bg-[length:100%_100%] bg-no-repeat min-h-screen text-[rgb(6,24,102)]">
-        <motion.img 
-        src={dolphins}
-        alt="Swimming Dolphin"
-        animate={{
-          x: mousePosition.x,
-          y: mousePosition.y - 150,
-        }}
-        style={{ position: 'fixed', pointerEvents: 'none', zIndex: 9999, filter: "drop-shadow(#60D5FF 0.7rem 0.7rem 7px)"}}
-        />
+      <motion.img 
+      src={dolphins}
+      alt="Swimming Dolphin"
+      animate={{
+        x: mousePosition.x,
+        y: mousePosition.y - 150,
+      }}
+      style={{ position: 'fixed', pointerEvents: 'none', zIndex: 9999, filter: "drop-shadow(#60D5FF 0.7rem 0.7rem 7px)"}}
+      />
 
-        {/** Header */}
-        <nav className='mb-4 flex pt-12 justify-center'>
-          <Link to="/music-logs/" className='text-5xl'>Music Logs</Link>
-          <Link to="/music-logs/apps" className='absolute top-12 right-24 text-2xl text-sky-400 bg-blue-400 p-2 rounded-2xl hover:bg-sky-200'>hehe</Link>
-        </nav>
-        
-        <Routes>
-          <Route path="/music-logs/" element={<Videos />} />
-          <Route path="/music-logs/apps" element={<MusicLanding />} />
-        </Routes>
-      </div>
+      {/** Header */}
+      <Header />
+      
+      <Routes>
+        <Route path="/music-logs/" element={<Videos />} />
+        <Route path="/music-logs/songs" element={<MusicLanding />} />
+      </Routes>
     </div>
   )
 }
