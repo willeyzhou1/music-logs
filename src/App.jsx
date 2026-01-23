@@ -18,7 +18,7 @@ function App() {
         setBackground(defaultImage);
         break;
       case "/music-logs/songs":
-        setBackground(repeatingBackground); // put another image here
+        setBackground(repeatingBackground);
         break;
       default:
         setBackground(defaultImage);

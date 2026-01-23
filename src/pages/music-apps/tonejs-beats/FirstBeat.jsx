@@ -12,8 +12,8 @@ export default function FirstBeat() {
     }).toDestination();
     Tone.loaded().then(() => {
       const now = Tone.now();
-      sampler.triggerAttackRelease("D2", "1m", now);
-      sampler.triggerAttackRelease("B1", "1m", now + 1);
+      sampler.triggerAttackRelease("D2", "8n", now);
+      sampler.triggerAttackRelease("B1", "8n", now + 0.75);
     })
   })
 }
