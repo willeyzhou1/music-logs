@@ -10,7 +10,7 @@ export default function Chords() {
             chord1.forEach((note1, i) => {
                 synth.triggerAttackRelease(note1, "2n", now + i * 0.05);
             });
-            const chord1Length = chord1.length * 0.05 + 1.65;
+            const chord1Length = chord1.length * 0.05 + 1;
 
             chord2.forEach((note2, j) => {
                 synth.triggerAttackRelease(note2, "2n", chord1Length + now + j * 0.05);
